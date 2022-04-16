@@ -14,9 +14,11 @@ class Snake {
 
     this.alive = true;
 
-    this.speed = 500;
+    this.speed = 100;
 
     this.moveTime = 0;
+
+    this.tail = new Phaser.Geom.Point(x, y);
 
     this.heading = RIGHT;
     this.direction = RIGHT;
@@ -77,7 +79,8 @@ class Snake {
       this.body.getChildren(),
       this.headPosition.x * 16,
       this.headPosition.y * 16,
-      1
+      1,
+      this.tail
     );
 
     this.moveTime = time + this.speed;

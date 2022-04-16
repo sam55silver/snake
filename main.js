@@ -1,10 +1,11 @@
 import Phaser from "phaser";
 import Snake from "./components/Snake";
-import food from "./assets/food.png";
-import body from "./assets/body.png";
+import Food from "./components/Food";
+import foodImage from "./assets/food.png";
+import bodyImage from "./assets/body.png";
 import "./style.css";
 
-var config = {
+let config = {
   type: Phaser.WEBGL,
   width: 640,
   height: 480,
@@ -18,17 +19,19 @@ var config = {
 };
 
 let snake;
+let food;
 let cursors;
 
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image("food", food);
-  this.load.image("body", body);
+  this.load.image("food", foodImage);
+  this.load.image("body", bodyImage);
 }
 
 function create() {
   snake = new Snake(this, 8, 8);
+  food = new Food(this, 3, 4);
 
   cursors = this.input.keyboard.createCursorKeys();
 }
