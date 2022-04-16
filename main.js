@@ -51,5 +51,7 @@ function update(time, delta) {
     snake.faceUp();
   }
 
-  snake.update(time);
+  if(snake.update(time)) {
+    snake.collideWithFood(food);
+  }
 }

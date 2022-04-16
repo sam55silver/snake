@@ -87,6 +87,27 @@ class Snake {
 
     return true;
   }
+
+  grow() {
+    // Add another body to the tail
+    this.body.create(this.tail.x, this.tail.y, "body").setOrigin(0);
+  }
+
+  collideWithFood(food) {
+    if (this.head.x === food.x && this.head.y === food.y) {
+      this.grow();
+      food.eat();
+
+      // Increase speed of snake for every 5 food eaten
+      if (this.speed > 20 && food.total % 5 === 0) {
+        this.speed -= 5;
+      }
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 export default Snake;
