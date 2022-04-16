@@ -83,9 +83,23 @@ class Snake {
       this.tail
     );
 
-    this.moveTime = time + this.speed;
+    let hitBody = Phaser.Actions.GetFirst(
+      this.body.getChildren(),
+      { x: this.head.x, y: this.head.y },
+      1
+    );
 
-    return true;
+    if (hitBody) {
+      console.log("dead");
+
+      this.alive = false;
+
+      return false;
+    } else {
+      this.moveTime = time + this.speed;
+
+      return true;
+    }
   }
 
   grow() {
@@ -107,6 +121,17 @@ class Snake {
     } else {
       return false;
     }
+  }
+
+  updateGrid(grid) {
+    this.body.children.each((segment) => {
+      let bx = segment.x / 16;
+      let by = segment.y / 16;
+
+      grid[by][bx] = false;
+    });
+
+    return grid;
   }
 }
 

@@ -51,7 +51,43 @@ function update(time, delta) {
     snake.faceUp();
   }
 
-  if(snake.update(time)) {
-    snake.collideWithFood(food);
+  if (snake.update(time)) {
+    if(snake.collideWithFood(food)) {
+      repositionFood();
+    };
+  }
+}
+
+function repositionFood() {
+  let testGrid = [];
+
+  for (let y = 0; y < 30; y++) {
+    testGrid[y] = [];
+
+    for (let x = 0; x < 40; x++) {
+      testGrid[y][x] = true;
+    }
+  }
+
+  snake.updateGrid(testGrid);
+
+  let validLocations = [];
+
+  for (let y = 0; y < 30; y++) {
+    for (let x = 0; x < 40; x++) {
+      if (testGrid[y][x] === true) {
+        validLocations.push({ x: x, y: y });
+      }
+    }
+  }
+
+  if (validLocations.length > 0) {
+    var pos = Phaser.Math.RND.pick(validLocations);
+
+    food.setPosition(pos.x * 16, pos.y * 16);
+
+    return true;
+  } else {
+    return false;
   }
 }
