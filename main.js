@@ -1,12 +1,14 @@
 import Phaser from "phaser";
+import Snake from "./components/Snake";
 import food from "./assets/food.png";
 import body from "./assets/body.png";
+import "./style.css";
 
 var config = {
   type: Phaser.WEBGL,
   width: 640,
   height: 480,
-  backgroundColor: "#bfcc00",
+  backgroundColor: "#76b5c5",
   parent: "snake-game",
   scene: {
     preload: preload,
@@ -18,20 +20,6 @@ var config = {
 let snake;
 let cursors;
 
-class Snake extends Phaser.Class {
-  constructor(scene, x, y) {
-    this.headPosition = new Phaser.Geom.Point(x, y);
-    this.body = scene.add.group();
-    this.head = this.body.create(x * 16, y * 16, "body");
-    this.head.setOrigin(0);
-  }
-}
-
-const UP = 0;
-const DOWN = 1;
-const LEFT = 2;
-const RIGHT = 3;
-
 var game = new Phaser.Game(config);
 
 function preload() {
@@ -39,6 +27,26 @@ function preload() {
   this.load.image("body", body);
 }
 
-function create() {}
+function create() {
+  snake = new Snake(this, 8, 8);
 
-function update(time, delta) {}
+  cursors = this.input.keyboard.createCursorKeys();
+}
+
+function update(time, delta) {
+  if (!snake.alive) {
+    return;
+  }
+
+  if (cursors.left.isDown) {
+    snake.faceLeft();
+  } else if (cursors.right.isDown) {
+    snake.faceRight();
+  } else if (cursors.down.isDown) {
+    snake.faceDown();
+  } else if (cursors.up.isDown) {
+    snake.faceUp();
+  }
+
+  snake.update(time);
+}
