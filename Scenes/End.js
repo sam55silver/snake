@@ -2,9 +2,16 @@ import Phaser from "phaser";
 
 class End extends Phaser.Scene {
   constructor() {
-    super({ key: "End" });
+    super({ key: "end" });
   }
   create() {
+    const UIScene = this.scene.get("uiscene");
+    UIScene.scene.setVisible(false);
+
+    const score = UIScene.score;
+    console.log(`Score: ${score}`);
+
+
     const screenCenterX =
       this.cameras.main.worldView.x + this.cameras.main.width / 2;
     const screenCenterY =
@@ -28,6 +35,8 @@ class End extends Phaser.Scene {
 
     button.setInteractive().on("pointerdown", () => {
       this.scene.start("game");
+      UIScene.setScore();
+      UIScene.scene.setVisible(true);
     });
   }
 }

@@ -41,6 +41,7 @@ class Game extends Phaser.Scene {
 
     if (this.snake.update(time)) {
       if (this.snake.collideWithFood(this.food)) {
+        this.events.emit('addScore');
         this.repositionFood();
       }
     }
@@ -78,10 +79,6 @@ class Game extends Phaser.Scene {
     } else {
       return false;
     }
-  }
-
-  endScene() {
-    this.scene.start('End');
   }
 }
 
