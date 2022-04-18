@@ -11,6 +11,7 @@ class Snake {
     this.body = scene.add.group();
     this.head = this.body.create(x * 16, y * 16, "body");
     this.head.setOrigin(0);
+    this.scene = scene;
 
     this.alive = true;
 
@@ -93,6 +94,7 @@ class Snake {
       console.log("dead");
 
       this.alive = false;
+      this.scene.endScene();
 
       return false;
     } else {

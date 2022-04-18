@@ -5,3 +5,8 @@ body {
   margin: 0;
   height: 100vh;
 }
+
+@font-face {
+  font-family: "RetroGaming";
+  src: url('assets/RetroGaming.ttf');
+}
