@@ -7,7 +7,7 @@ class UIScene extends Phaser.Scene {
     this.scoreDisplay;
   }
 
-  create() {
+  preload() {
     this.scoreDisplay = this.add.text(
       this.cameras.main.width - 180,
       20,
@@ -17,7 +17,9 @@ class UIScene extends Phaser.Scene {
         fontSize: "30px",
       }
     );
+  }
 
+  create() {
     const gameScene = this.scene.get("game");
 
     gameScene.events.on(

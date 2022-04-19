@@ -21,12 +21,21 @@ class End extends Phaser.Scene {
       .text(screenCenterX, screenCenterY - 50, "Game Over!", {
         fontFamily: "RetroGaming",
         fontSize: "40px",
+        fill: "red"
+      })
+      .setOrigin(0.5)
+      .setResolution(10);
+
+    this.add
+      .text(screenCenterX, screenCenterY, score, {
+        fontFamily: "RetroGaming",
+        fontSize: "25px"
       })
       .setOrigin(0.5)
       .setResolution(10);
 
     let button = this.add
-      .text(screenCenterX, screenCenterY, "Play Again", {
+      .text(screenCenterX, screenCenterY+40, "Play Again", {
         fontFamily: "RetroGaming",
         fontSize: "20px",
       })
